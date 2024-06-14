@@ -1,6 +1,6 @@
 # Tech Assignment
 Data Gathering using ESP32 with DHT11 sensor.
----
+
 ## ESP32 Component Assembly
 ![](/img/4.jpg)
 
