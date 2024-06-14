@@ -1,3 +1,4 @@
 .vercel
 requirements.txt
 vercel.json
+.gitignore

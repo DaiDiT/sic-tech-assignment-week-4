@@ -3,7 +3,7 @@
 #include <DHT_U.h>
 #include <HTTPClient.h>
 
-// WiFi credentials dan server API
+// Kredensial WiFi dan server API
 const char *WIFI_SSID = "UINSGD-ClassRoom";
 const char *WIFI_PASS = "uinbandunghotspot";
 const char *SERVER_URL = "https://esp32-flask.vercel.app/sensor";
@@ -14,11 +14,11 @@ const char *SERVER_URL = "https://esp32-flask.vercel.app/sensor";
 DHT dht(DHTPIN, DHTTYPE);
 
 // Fungsi untuk mendapatkan data suhu
-float get_temperature_data() {
+float getTemperature() {
   float t = dht.readTemperature();
   if (isnan(t)) {
     Serial.println(F("Error reading temperature!"));
-    return 0.0;  // Return default value on error
+    return 0.0;  // Mengembalikan nilai default jika error
   } else {
     Serial.print(F("Temperature: "));
     Serial.print(t);
@@ -28,11 +28,11 @@ float get_temperature_data() {
 }
 
 // Fungsi untuk mendapatkan data kelembaban
-float get_humidity_data() {
+float getHumidity() {
   float h = dht.readHumidity();
   if (isnan(h)) {
     Serial.println(F("Error reading humidity!"));
-    return 0.0;  // Return default value on error
+    return 0.0;  // Mengembalikan nilai default jika error
   } else {
     Serial.print(F("Humidity: "));
     Serial.print(h);
@@ -42,7 +42,7 @@ float get_humidity_data() {
 }
 
 // Fungsi untuk mengirim data ke api
-void send_data_to_api(float temperature, float humidity) {
+void sendDataToAPI(float temperature, float humidity) {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
     http.begin(SERVER_URL);
@@ -80,6 +80,6 @@ void setup() {
 
 void loop() {
   delay(3000);
-  send_data_to_api(get_temperature_data(), get_humidity_data());
+  sendDataToAPI(getTemperature(), getHumidity());
   delay(3000);
 }
